@@ -267,6 +267,11 @@ export default class HTML5Backend {
 
     const clientOffset = getEventClientOffset(e);
 
+    // end any native drag events that fineuploader supressed.
+    if (this.isDraggingNativeItem()) {
+      this.endDragNativeItem();
+    }
+
     // Don't publish the source just yet (see why below)
     this.actions.beginDrag(dragStartSourceIds, {
       publishSource: false,
